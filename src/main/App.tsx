@@ -1,16 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { AuthLayout } from "./layouts/auth-layout";
-import { PrimaryLayout } from "./layouts/primary-layout";
-import { Home } from "./pages/home/home-page";
-import { Login } from "./pages/login/login-page";
-import { RegisterPage } from "./pages/register/register-page";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { fetchUserInfo, logout, selectUserApiStatus } from "./store/userSlice";
-import { ProtectedRoutes } from "./utils/protected-route";
-import { useAppDispatch, useAppSelector } from "./store/store";
-import { auth } from "./configs/firebase";
+import { useAppDispatch, useAppSelector } from "../store/store";
+import { fetchUserInfo, logout, selectUserApiStatus } from "../store/userSlice";
+import { auth } from "../configs/firebase";
+import { PrimaryLayout } from "../layouts/primary-layout";
+import { ProtectedRoutes } from "../utils/protected-route";
+import { Home, Login } from "@mui/icons-material";
+import { AuthLayout } from "../layouts/auth-layout";
+import { RegisterPage } from "pages/register/register-page";
 
 function App() {
   const dispatch = useAppDispatch();
