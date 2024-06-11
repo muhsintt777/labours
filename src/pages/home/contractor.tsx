@@ -9,7 +9,7 @@ import {
   getReceivedRequests,
   updateContractorPost,
   updateRequestStatus,
-} from "../../firebase/firebaseConfig";
+} from "../../configs/firebase";
 import { ContractorPost, RequestType } from "../../utils/types";
 import { useAppSelector } from "../../store/store";
 import { selectUser } from "../../store/userSlice";

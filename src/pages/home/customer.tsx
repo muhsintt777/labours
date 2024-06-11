@@ -7,7 +7,7 @@ import {
   createRequest,
   getAllContractorPost,
   getSendedrequests,
-} from "../../firebase/firebaseConfig";
+} from "../../configs/firebase";
 import { useAppSelector } from "../../store/store";
 import { selectUser } from "../../store/userSlice";
 

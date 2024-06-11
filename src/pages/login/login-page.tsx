@@ -12,7 +12,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
 import { EMAIL } from "../../utils/regex";
-import { login as firebaseLogin } from "../../firebase/firebaseConfig";
+import { login as firebaseLogin } from "../../configs/firebase";
 import { login } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 

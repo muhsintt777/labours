@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Rootstate } from "./store";
 import { User } from "../utils/types";
 import { doc, getDoc } from "firebase/firestore";
-import { db, firebaseSignout } from "../firebase/firebaseConfig";
+import { db, firebaseSignout } from "../configs/firebase";
 
 interface InitialState {
   status: "loading" | "successfull" | "failed" | "idle";
@@ -22,11 +22,11 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action:PayloadAction<User>) => {
+    login: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
-      state.status = 'successfull';
+      state.status = "successfull";
     },
-    logout: (state,) => {
+    logout: (state) => {
       state.user = null;
       state.status = "idle";
       firebaseSignout();
@@ -37,10 +37,13 @@ export const userSlice = createSlice({
       .addCase(fetchUserInfo.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchUserInfo.fulfilled, (state, action: PayloadAction<User>) => {
-        state.status = "successfull";
-        state.user = action.payload;
-      })
+      .addCase(
+        fetchUserInfo.fulfilled,
+        (state, action: PayloadAction<User>) => {
+          state.status = "successfull";
+          state.user = action.payload;
+        }
+      )
       .addCase(fetchUserInfo.rejected, (state) => {
         state.status = "failed";
       });
@@ -49,10 +52,14 @@ export const userSlice = createSlice({
 
 export const fetchUserInfo = createAsyncThunk(
   "user/fetchUserInfo",
-  async (args:{uid: string, email: string}) => {
+  async (args: { uid: string; email: string }) => {
     const docRef = doc(db, "userdetails", args.uid);
     const response = await getDoc(docRef);
-    const userdetails =  { ...response.data(), email: args.email, id: args.uid } as User;
+    const userdetails = {
+      ...response.data(),
+      email: args.email,
+      id: args.uid,
+    } as User;
     return userdetails;
   }
 );

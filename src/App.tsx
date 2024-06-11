@@ -7,10 +7,10 @@ import { Login } from "./pages/login/login-page";
 import { RegisterPage } from "./pages/register/register-page";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase/firebaseConfig";
 import { fetchUserInfo, logout, selectUserApiStatus } from "./store/userSlice";
 import { ProtectedRoutes } from "./utils/protected-route";
 import { useAppDispatch, useAppSelector } from "./store/store";
+import { auth } from "./configs/firebase";
 
 function App() {
   const dispatch = useAppDispatch();

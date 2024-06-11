@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import { FormEvent, useState } from "react";
 import { EMAIL, FULL_NAME } from "../../utils/regex";
-import { createAccount } from "../../firebase/firebaseConfig";
+import { createAccount } from "../../configs/firebase";
 import { useAppDispatch } from "../../store/store";
 import { login } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";

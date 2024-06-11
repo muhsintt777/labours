@@ -20,7 +20,7 @@ import {
 } from "firebase/auth";
 import { ContractorPost, RequestType, User } from "../utils/types";
 
-const firebaseConfig = {
+const configs = {
   apiKey: import.meta.env.VITE_API_KEY,
   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
   projectId: import.meta.env.PROJECT_ID,
@@ -29,7 +29,7 @@ const firebaseConfig = {
   appId: import.meta.env.APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(configs);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 export const auth = getAuth(app);
