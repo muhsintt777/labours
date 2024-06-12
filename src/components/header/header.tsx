@@ -2,7 +2,7 @@ import { Avatar, Menu, MenuItem } from "@mui/material";
 import styles from "./style.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { logout, selectUser, selectUserApiStatus } from "../../store/userSlice";
-import AnoProfileImg from "../../images/ano_profile.png";
+import AnoProfileImg from "assets/images/ano_profile.png";
 import { MouseEvent, useState } from "react";
 
 export const Header = () => {
