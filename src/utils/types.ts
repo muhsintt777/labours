@@ -1,22 +1,22 @@
-export interface User {
+export type User = {
   id: string;
   name: string;
   email: string;
   type: number;
-}
+};
 
-export interface ContractorPost {
+export type ContractorPost = {
   id: string;
   title: string;
   phone: string;
   description: string;
   labourCount: number;
-}
+};
 
-export interface RequestType {
+export type RequestType = {
   id: string;
   senderId: string;
   senderName: string;
   receiverId: string;
   status: 1 | 2 | 3;
-}
+};
