@@ -7,13 +7,11 @@ import { db, firebaseSignout } from "../configs/firebase";
 interface InitialState {
   status: "loading" | "successfull" | "failed" | "idle";
   user: User | null;
-  token: string | null;
   error: string | null;
 }
 
 const initialState: InitialState = {
   status: "loading",
-  token: null,
   user: null,
   error: null,
 };
@@ -46,6 +44,7 @@ export const userSlice = createSlice({
       )
       .addCase(fetchUserInfo.rejected, (state) => {
         state.status = "failed";
+        state.user = null;
       });
   },
 });
