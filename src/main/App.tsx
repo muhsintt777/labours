@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
@@ -7,12 +7,14 @@ import { fetchUserInfo, logout, selectUserApiStatus } from "../store/userSlice";
 import { auth } from "../configs/firebase";
 import { PrimaryLayout } from "../layouts/primary-layout";
 import { ProtectedRoutes } from "../utils/protected-route";
-import { Home, Login } from "@mui/icons-material";
 import { AuthLayout } from "../layouts/auth-layout";
 import { RegisterPage } from "pages/register/register-page";
+import { Home } from "pages/home/home-page";
+import { Login } from "pages/login/login-page";
 
 function App() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const userApiStatus = useAppSelector(selectUserApiStatus);
 
   useEffect(() => {
@@ -27,6 +29,15 @@ function App() {
       unsub();
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    if (userApiStatus === "failed") {
+      dispatch(logout());
+      setTimeout(() => {
+        navigate("auth/login");
+      }, 3 * 1000);
+    }
+  }, [userApiStatus, dispatch, navigate]);
 
   return (
     <>
@@ -47,7 +58,7 @@ function App() {
             </Route>
           </Route>
           <Route path="/auth" element={<AuthLayout />}>
-            <Route path="login" element={<Login />} />
+            <Route index path="login" element={<Login />} />
             <Route path="register" element={<RegisterPage />} />
           </Route>
           <Route path="*" element={<p>page not found</p>} />
@@ -56,7 +67,7 @@ function App() {
 
       {userApiStatus === "failed" && (
         <div className="loaderWrap">
-          <p>fetch user failed.</p>
+          <p>fetch user failed. Redirecting to login...</p>
         </div>
       )}
     </>
