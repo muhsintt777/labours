@@ -1,3 +1,5 @@
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -17,12 +19,10 @@ import {
   SelectChangeEvent,
   Snackbar,
 } from "@mui/material";
-import { FormEvent, useState } from "react";
-import { EMAIL, FULL_NAME } from "../../utils/regex";
-import { createAccount } from "../../configs/firebase";
-import { useAppDispatch } from "../../store/store";
-import { login } from "../../store/userSlice";
-import { useNavigate } from "react-router-dom";
+import { createAccount } from "configs/firebase";
+import { useAppDispatch } from "store/store";
+import { login } from "store/userSlice";
+import { EMAIL, FULL_NAME } from "utils/regex";
 
 const USER_TYPE = {
   CUSTOMER: 1,
