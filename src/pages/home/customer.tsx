@@ -10,12 +10,14 @@ import {
 } from "../../configs/firebase";
 import { useAppSelector } from "../../store/store";
 import { selectUser } from "../../store/userSlice";
+import { ERROR_MESSAGES } from "utils/constants";
 
 const API_STATUS = {
   IDLE: 1,
   LOADING: 2,
   FAILED: 3,
   SUCCESS: 4,
+  NO_DATA: 5,
 };
 
 interface ContractorPostWithRequestStatus extends ContractorPost {
@@ -47,7 +49,9 @@ export const Customer = () => {
         return item;
       });
       setAllPost(updatedPosts);
-    } catch (error) {}
+    } catch (error) {
+      //
+    }
   }
 
   function renderDescriptionChips(description: string) {
@@ -62,21 +66,30 @@ export const Customer = () => {
   }
 
   useEffect(() => {
-    if (user) {
-      (async () => {
-        try {
-          const [posts, requests] = await Promise.all([
-            getAllContractorPost(),
-            getSendedrequests(user.id),
-          ]);
-          const statusUpdatedPosts = addRequestStatus(posts, requests);
-          setAllPost(statusUpdatedPosts);
-          setAllPostApiStatus(API_STATUS.SUCCESS);
-        } catch (error) {
+    if (!user) return;
+
+    (async () => {
+      try {
+        const [posts, requests] = await Promise.all([
+          getAllContractorPost(),
+          getSendedrequests(user.id),
+        ]);
+        if (!posts.length) throw new Error(ERROR_MESSAGES.EMPTY_RESPONSE);
+
+        const statusUpdatedPosts = addRequestStatus(posts, requests);
+        setAllPost(statusUpdatedPosts);
+        setAllPostApiStatus(API_STATUS.SUCCESS);
+      } catch (error) {
+        if (
+          error instanceof Error &&
+          error.message === ERROR_MESSAGES.EMPTY_RESPONSE
+        ) {
+          setAllPostApiStatus(API_STATUS.NO_DATA);
+        } else {
           setAllPostApiStatus(API_STATUS.FAILED);
         }
-      })();
-    }
+      }
+    })();
   }, [user]);
   return (
     <>
@@ -124,6 +137,8 @@ export const Customer = () => {
             </div>
           </div>
         ))}
+
+      {allPostApiStatus === API_STATUS.NO_DATA && <p>No active posts</p>}
     </>
   );
 };
