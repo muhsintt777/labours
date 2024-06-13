@@ -1,7 +1,6 @@
-import { Alert, Button, Snackbar, TextField } from "@mui/material";
 import styles from "./contractorStyle.module.css";
 import { FormEvent, useEffect, useState } from "react";
-import { FULL_NAME, JOB_DESCRIPION, PHONE_NUMBER } from "../../utils/regex";
+import { Alert, Button, Snackbar, TextField } from "@mui/material";
 import {
   REQUEST_STATUS,
   createContratorPost,
@@ -9,10 +8,11 @@ import {
   getReceivedRequests,
   updateContractorPost,
   updateRequestStatus,
-} from "../../configs/firebase";
-import { ContractorPost, RequestType } from "../../utils/types";
-import { useAppSelector } from "../../store/store";
-import { selectUser } from "../../store/userSlice";
+} from "configs/firebase";
+import { REGEX } from "utils/constants";
+import { ContractorPost, RequestType } from "utils/types";
+import { useAppSelector } from "store/store";
+import { selectUser } from "store/userSlice";
 
 const API_STATUS = {
   LOADING: 1,
@@ -53,21 +53,21 @@ export const Contractor = () => {
     e.preventDefault();
     if (updateContratorDetailsApiStatus === API_STATUS.LOADING) return;
 
-    if (!FULL_NAME.test(title)) {
+    if (!REGEX.FULL_NAME.test(title)) {
       setSnackBarDetails({
         open: true,
         message: "Enter a valid title",
         severity: "warning",
       });
       return;
-    } else if (!PHONE_NUMBER.test(phonenumber)) {
+    } else if (!REGEX.PHONE_NUMBER.test(phonenumber)) {
       setSnackBarDetails({
         open: true,
         message: "Enter a valid phone number",
         severity: "warning",
       });
       return;
-    } else if (!JOB_DESCRIPION.test(description)) {
+    } else if (!REGEX.JOB_DESCRIPION.test(description)) {
       setSnackBarDetails({
         open: true,
         message: "Description must consist of words separated by commas (,)",
@@ -154,7 +154,9 @@ export const Contractor = () => {
         });
         setReceivedRequests(updatedRequests);
       }
-    } catch (error) {}
+    } catch (error) {
+      //
+    }
   }
 
   useEffect(() => {
