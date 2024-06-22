@@ -22,7 +22,7 @@ import {
 import { createAccount } from "configs/firebase";
 import { useAppDispatch } from "store/store";
 import { login } from "store/userSlice";
-import { EMAIL, FULL_NAME } from "utils/regex";
+import { REGEX } from "utils/constants";
 
 const USER_TYPE = {
   CUSTOMER: 1,
@@ -51,10 +51,10 @@ export const RegisterPage = () => {
     event.preventDefault();
     if (loading) return;
 
-    if (!FULL_NAME.test(name)) {
+    if (!REGEX.FULL_NAME.test(name)) {
       setSnackBarDetails({ open: true, message: "Please enter a valid name" });
       return;
-    } else if (!EMAIL.test(email)) {
+    } else if (!REGEX.EMAIL.test(email)) {
       setSnackBarDetails({ open: true, message: "Please enter a valid email" });
       return;
     } else if (password.length < 6) {

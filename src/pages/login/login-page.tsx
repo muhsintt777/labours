@@ -2,7 +2,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -11,10 +10,10 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
-import { EMAIL } from "../../utils/regex";
 import { login as firebaseLogin } from "../../configs/firebase";
 import { login } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
+import { REGEX } from "utils/constants";
 
 const defaultTheme = createTheme();
 
@@ -27,11 +26,11 @@ export const Login = () => {
     open: false,
     message: "",
   });
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!EMAIL.test(email)) {
+    if (!REGEX.EMAIL.test(email)) {
       setSnackBarDetails({ open: true, message: "Please enter a valid email" });
       return;
     } else if (password.length < 6) {
@@ -42,13 +41,14 @@ export const Login = () => {
       return;
     }
 
-    setLoading(true);
+    // setLoading(true);
     try {
       const user = await firebaseLogin(email, password);
       login(user);
       navigate("/");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      const errCode = error.code;
+      const errCode = error?.code;
       console.log(errCode, "err");
 
       if (errCode === "auth/invalid-credential") {
@@ -60,7 +60,7 @@ export const Login = () => {
         });
       }
     }
-    setLoading(false);
+    // setLoading(false);
   };
 
   return (
