@@ -1,15 +1,15 @@
-import { Button, Chip, CircularProgress } from "@mui/material";
 import styles from "./customerStyle.module.css";
 import { useEffect, useState } from "react";
-import { ContractorPost, RequestType } from "../../utils/types";
+import { Button, Chip, CircularProgress } from "@mui/material";
 import {
   REQUEST_STATUS,
   createRequest,
   getAllContractorPost,
   getSendedrequests,
-} from "../../configs/firebase";
-import { useAppSelector } from "../../store/store";
-import { selectUser } from "../../store/userSlice";
+} from "configs/firebase";
+import { useAppSelector } from "store/store";
+import { selectUser } from "store/userSlice";
+import { ContractorPost, RequestType } from "utils/types";
 import { ERROR_MESSAGES } from "utils/constants";
 
 const API_STATUS = {

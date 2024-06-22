@@ -1,8 +1,6 @@
-import { Header } from "../components/header/header";
 import styles from "./primary-layoutStyle.module.css";
 import { Outlet } from "react-router-dom";
-// import { Header } from "components/header/header";
-// import { SideNav } from "components/side-nav/side-nav";
+import { Header } from "components/header/header";
 
 export const PrimaryLayout = () => {
   return (
@@ -11,9 +9,7 @@ export const PrimaryLayout = () => {
         <Header />
       </div>
       <div className={styles.middle}>
-        <div className={styles.nav}>
-          {/* <SideNav /> */}
-        </div>
+        <div className={styles.nav}></div>
         <div className={styles.outlet}>
           <Outlet />
         </div>

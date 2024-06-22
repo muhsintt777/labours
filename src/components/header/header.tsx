@@ -1,9 +1,9 @@
-import { Avatar, Menu, MenuItem } from "@mui/material";
 import styles from "./style.module.css";
-import { useAppDispatch, useAppSelector } from "../../store/store";
-import { logout, selectUser, selectUserApiStatus } from "../../store/userSlice";
-import AnoProfileImg from "assets/images/ano_profile.png";
 import { MouseEvent, useState } from "react";
+import { Avatar, Menu, MenuItem } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "store/store";
+import { logout, selectUser, selectUserApiStatus } from "store/userSlice";
+import AnoProfileImg from "assets/images/ano_profile.png";
 
 export const Header = () => {
   const dispatch = useAppDispatch();

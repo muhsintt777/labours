@@ -1,9 +1,9 @@
 import styles from "./homeStyle.module.css";
-import { useAppSelector } from "../../store/store";
-import { selectUser } from "../../store/userSlice";
+import { useAppSelector } from "store/store";
+import { selectUser } from "store/userSlice";
+import { USER_TYPE } from "utils/constants";
 import { Customer } from "./customer";
 import { Contractor } from "./contractor";
-import { USER_TYPE } from "utils/constants";
 
 export const Home = () => {
   const user = useAppSelector(selectUser);

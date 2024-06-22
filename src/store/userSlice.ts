@@ -1,8 +1,8 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Rootstate } from "./store";
-import { User } from "../utils/types";
 import { doc, getDoc } from "firebase/firestore";
-import { db, firebaseSignout } from "../configs/firebase";
+import { User } from "utils/types";
+import { db, firebaseSignout } from "configs/firebase";
+import { Rootstate } from "./store";
 
 interface InitialState {
   status: "loading" | "successfull" | "failed" | "idle";

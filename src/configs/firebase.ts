@@ -18,7 +18,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { ContractorPost, RequestType, User } from "../utils/types";
+import { ContractorPost, RequestType, User } from "utils/types";
 
 const configs = {
   apiKey: import.meta.env.VITE_API_KEY,
