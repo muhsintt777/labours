@@ -8,3 +8,8 @@ export const REGEX = {
   PHONE_NUMBER: /^\+?\d{1,3}?[-. (]?\d{3}[-. )]?\d{3}[-. ]?\d{4}$/,
   JOB_DESCRIPION: /^\s*\w+(\s*\w+)*(\s*,\s*\w+(\s*\w+)*)*\s*$/,
 };
+
+export const USER_TYPE = {
+  CUSTOMER: 1,
+  CONTRACTOR: 2,
+};

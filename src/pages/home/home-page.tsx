@@ -3,11 +3,7 @@ import { useAppSelector } from "../../store/store";
 import { selectUser } from "../../store/userSlice";
 import { Customer } from "./customer";
 import { Contractor } from "./contractor";
-
-const USER_TYPE = {
-  CUSTOMER: 1,
-  CONTRACTOR: 2,
-};
+import { USER_TYPE } from "utils/constants";
 
 export const Home = () => {
   const user = useAppSelector(selectUser);

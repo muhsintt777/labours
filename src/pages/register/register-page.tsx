@@ -22,12 +22,8 @@ import {
 import { createAccount } from "configs/firebase";
 import { useAppDispatch } from "store/store";
 import { login } from "store/userSlice";
-import { REGEX } from "utils/constants";
+import { REGEX, USER_TYPE } from "utils/constants";
 
-const USER_TYPE = {
-  CUSTOMER: 1,
-  CONTRACTOR: 2,
-};
 const defaultTheme = createTheme();
 
 export const RegisterPage = () => {
