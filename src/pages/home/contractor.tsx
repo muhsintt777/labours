@@ -175,6 +175,8 @@ export const Contractor = () => {
           setDescription(post.description);
           setLabourCount(post.labourCount);
           setCurrentUserPostApiStatus(API_STATUS.SUCCESSFUL);
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           console.log(error, "currusererr");
           if (error.code === "empty") {
